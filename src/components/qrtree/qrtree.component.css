@@ -13,3 +13,11 @@ button {
   text-overflow: ellipsis;
   display: inline-block;
 }
+
+.filter-panel {
+  font-size: 9pt;
+}
+
+.filterlist {
+  width: 100%;
+}

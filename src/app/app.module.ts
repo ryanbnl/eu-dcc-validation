@@ -17,6 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -73,6 +74,7 @@ import { WelcomeDialogComponent } from '../components/welcome-dialog/welcome-dia
     MatInputModule,
     MatProgressBarModule,
     MatRadioModule,
+    MatSelectModule,
     MatSidenavModule,
     MatSnackBarModule,
     MatToolbarModule,
