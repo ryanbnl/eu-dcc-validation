@@ -2,10 +2,10 @@
 
 ## Validation response [high priority]
 
-- [] Provide dropdown of results including error reason
-- [] Provide dropdown of results including invalid reason
-- [] Remove "Error - Other" free text box
-- [] Remove "Invalid - Other" free text box
+- [x] Provide dropdown of results including error reason
+- [x] Provide dropdown of results including invalid reason
+- [x] Remove "Error - Other" free text box
+- [x] Remove "Invalid - Other" free text box
 
 ## Country list (sidebar) [high priority]
 

@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -71,6 +72,7 @@ import { WelcomeDialogComponent } from '../components/welcome-dialog/welcome-dia
     MatGridListModule,
     MatIconModule,
     MatInputModule,
+    MatMenuModule,
     MatProgressBarModule,
     MatRadioModule,
     MatSidenavModule,

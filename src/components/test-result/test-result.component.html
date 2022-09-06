@@ -2,23 +2,33 @@
   <mat-card-header>
     <mat-card-title>Results</mat-card-title>
   </mat-card-header>
-  <mat-card-content>
-
-    <mat-form-field appearance="fill" style="width: 100%;">
-      <mat-label>Describe your details and submit your result.</mat-label>
-      <textarea matInput [(ngModel)]="model.reason" class="dcc-text-reason"></textarea>     
-    </mat-form-field>
-    <p style="color: #f44336;" *ngIf="requireDescription">A description is required for Invalid QRs and Errors.</p>
-  </mat-card-content>
-  <mat-card-actions align="end">
+  <mat-card-actions align="start">
     <button mat-button (click)="valid()" class="dcc-btn-valid">
       <mat-icon>check_circle</mat-icon> Valid
     </button>
-    <button mat-button (click)="invalid()" color="accent" class="dcc-btn-invalid">
+
+    <!-- 
+    <button mat-button color="accent" class="dcc-btn-invalid" [matMenuTriggerFor]="invalidMenu">
       <mat-icon>report_problem</mat-icon> Invalid
     </button>
-    <button mat-button (click)="error()" color="warn" class="dcc-btn-error">
+    <mat-menu #invalidMenu="matMenu">
+      <button *ngFor="let reason of invalidReasons" (click)="invalid(reason)" mat-menu-item>{{ reason }}</button>
+    </mat-menu>
+    <button mat-button color="accent" class="dcc-btn-error" [matMenuTriggerFor]="errorMenu">
       <mat-icon>error</mat-icon> Error
     </button>
+    <mat-menu #errorMenu="matMenu">
+      <button *ngFor="let reason of errorReasons" (click)="error(reason)" mat-menu-item>{{ reason }}</button>
+    </mat-menu> -->
+
+
+    <button mat-button color="accent" class="dcc-btn-error" [matMenuTriggerFor]="badMenu">
+      <mat-icon>error</mat-icon> {{ model.reason || '(Error? Select reason)' }}
+    </button>
+    <mat-menu #badMenu="matMenu">
+      <button *ngFor="let reason of invalidReasons" (click)="invalid(reason)" mat-menu-item>{{ reason }}</button>
+      <button *ngFor="let reason of errorReasons" (click)="error(reason)" mat-menu-item>{{ reason }}</button>
+    </mat-menu>
+
   </mat-card-actions>
 </mat-card>

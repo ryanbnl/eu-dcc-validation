@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IQRCode, TestResultEnum } from '../../interfaces/model.interface';
 import { AppStore } from '../../stores/app.store';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-test-result',
@@ -14,14 +15,28 @@ export class TestResultComponent implements OnInit {
 
   requireDescription = false;
 
+  invalidReasons: string[] = [
+    'Invalid - partial vaccination',
+    'Invalid - fully vaccinated booster required',
+    'Invalid - vaccine or test not supported',
+    'Invalid - unknown, app provides no details'
+  ];
+
+  errorReasons: string[] = [
+    'Error - scanner does not recognise image as QR code',
+    'Error - scanner cannot parse the QR code',
+    'Error - signature check failed',
+    'Error - unknown, app provides no details'
+  ];
+
   constructor(private store: AppStore) {
     this.item = null;
     this.store.getSelected().subscribe((selected: IQRCode | null) => {
       this.item = selected;
       if (!!selected) {
-        this.sync(selected)
+        this.sync(selected);
       }
-      console.log('TestResultComponent: Selected: ', this.item)
+      console.log('TestResultComponent: Selected: ', this.item);
     });
   }
 
@@ -32,40 +47,34 @@ export class TestResultComponent implements OnInit {
    * Mark the QR code as valid.
    */
   valid(): void {
-    console.log('Log success.')
-    this.report(TestResultEnum.Valid)
+    console.log('Log success.');
+    this.report(TestResultEnum.Valid);
   }
 
   /**
    * Mark the QR code as invalid.
    */
-  invalid(): void {
-    if(!this.validate()) {
-      return;
-    };
-    console.log('Log warning.', this.model)
-    this.report(TestResultEnum.Invalid)
+  invalid(reason:string): void {
+    console.log('Log warning.', this.model);
+    this.report(TestResultEnum.Invalid, reason);
   }
 
   /**
    * Report an error during the scanning process.
    */
-  error(): void {
-    if(!this.validate()) {
-      return;
-    };
-    console.log('Log error.', this.model)
-    this.report(TestResultEnum.Error)
+  error(reason: string): void {
+    console.log('Log error.', this.model);
+    this.report(TestResultEnum.Error, reason);
   }
 
   /**
    * Report and submit the validation outcome.
    * @param result 
    */
-  report(result: TestResultEnum) {
+  report(result: TestResultEnum, reason?: string) {
     const id = this.store.getSelected().value?.id
     if (!!id) {
-      this.store.capture({ file: id, result: result, comment: this.model.reason, })
+      this.store.capture({ file: id, result: result, comment: reason || '' })
       this.broadcast();
       this.cleanup();
       this.store.next();
@@ -77,25 +86,18 @@ export class TestResultComponent implements OnInit {
     this.requireDescription = false;
   }
 
-  private validate() {
-    if (!this.model.reason) {
-      this.requireDescription = true;
-      return false;
-    }
-    return true;
-  }
   /**
    * Notify the result is submitted.
    */
   private broadcast() {
-    this.store.setMessage('Responce captured.')
+    this.store.setMessage('Responce captured.');
   }
 
   /**
    * Clean up the form.
    */
   private cleanup() {
-    this.model = { reason: '' }
+    this.model = { reason: '' };
   }
 
   /**
