@@ -6,22 +6,6 @@
     <button mat-button (click)="valid()" class="dcc-btn-valid">
       <mat-icon>check_circle</mat-icon> Valid
     </button>
-
-    <!-- 
-    <button mat-button color="accent" class="dcc-btn-invalid" [matMenuTriggerFor]="invalidMenu">
-      <mat-icon>report_problem</mat-icon> Invalid
-    </button>
-    <mat-menu #invalidMenu="matMenu">
-      <button *ngFor="let reason of invalidReasons" (click)="invalid(reason)" mat-menu-item>{{ reason }}</button>
-    </mat-menu>
-    <button mat-button color="accent" class="dcc-btn-error" [matMenuTriggerFor]="errorMenu">
-      <mat-icon>error</mat-icon> Error
-    </button>
-    <mat-menu #errorMenu="matMenu">
-      <button *ngFor="let reason of errorReasons" (click)="error(reason)" mat-menu-item>{{ reason }}</button>
-    </mat-menu> -->
-
-
     <button mat-button color="accent" class="dcc-btn-error" [matMenuTriggerFor]="badMenu">
       <mat-icon>error</mat-icon> {{ model.reason || '(Error? Select reason)' }}
     </button>
@@ -29,6 +13,5 @@
       <button *ngFor="let reason of invalidReasons" (click)="invalid(reason)" mat-menu-item>{{ reason }}</button>
       <button *ngFor="let reason of errorReasons" (click)="error(reason)" mat-menu-item>{{ reason }}</button>
     </mat-menu>
-
   </mat-card-actions>
 </mat-card>
